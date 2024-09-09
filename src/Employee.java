@@ -10,7 +10,7 @@ public class Employee {
     private float salary;
 
     public Employee(String fullName, int department, float salary) {
-        if (fullName == null) throw new IllegalArgumentException("Не указаны ФИО");
+        if (fullName == null || fullName.trim().isEmpty()) throw new IllegalArgumentException("Не указаны ФИО");
         this.fullName = fullName.trim();
         this.setDepartment(department);
         this.setSalary(salary);
