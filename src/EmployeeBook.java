@@ -124,7 +124,7 @@ public class EmployeeBook {
     public double getAvgSalary(int department) {
         double sum = getAllSalary(department);
         int len = getEmployeeCount(department);
-        return (double) (Math.round(sum / len * 100) / 100);
+        return (double) Math.round(sum / len * 100) / 100;
     }
 
     public double getAvgSalary() {

@@ -52,7 +52,7 @@ public class Employee {
         if (salary < 0) {
             throw new IllegalArgumentException("Значение зарплаты меньше нуля");
         }
-        this.salary = (double) (Math.round(salary * 100) / 100);
+        this.salary = (double) Math.round(salary * 100) / 100;
     }
 
     @Override

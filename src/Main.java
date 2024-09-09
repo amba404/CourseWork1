@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -7,6 +9,13 @@ public class Main {
         employeeBook.addEmployee(new Employee("Петров Петр Петрович", 2, 16_000));
         employeeBook.addEmployee(new Employee("Сидоров Сидор Сидорович", 1, 17_000));
         employeeBook.addEmployee(new Employee("Горбунков Семен Семенович", 4, 27_000));
+
+        for (int i = 0; i < 10; i++) {
+            if (!employeeBook.addEmployee(new Employee("Сотрудник " + i, i % 5 +1, (i+1) * 1_100))) {
+                System.out.println("Нет свободных вакансий");
+                break;
+            }
+        }
         System.out.println("employeeBook.getEmployeeCount() = " + employeeBook.getEmployeeCount());
 
         employeeBook.delEmployeeById(4);
