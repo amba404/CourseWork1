@@ -25,6 +25,8 @@ public class Main {
         System.out.printf("Средняя зарплата по отделу %d: %.2f\n", dept, getAvgSalary(employees));
         changeSalaryByPercent(employees, .5, dept);
         printAllEmployees(employees, dept);
+        printAllEmployeesSalaryLessThan(employees, 18000);
+        printAllEmployeesSalaryGreaterOrEqualThan(employees, 18000);
 
 
     }
@@ -37,7 +39,7 @@ public class Main {
         System.out.printf("Список сотрудников отдела %d (всего %d):\n", department, getEmployeeCount(arr, department));
         for (final Employee empl : arr) {
             if (isEmployeeNeed(empl, department)) {
-                System.out.printf("id=%d, fullName='%s', salary=%.2f\n", empl.getId(), empl.getFullName(), empl.getSalary());
+                System.out.println(getEmployeeFormatted(empl));
             }
         }
     }
@@ -145,5 +147,26 @@ public class Main {
         changeSalaryByPercent(arr, changePercent, -1);
     }
 
+    private static String getEmployeeFormatted(Employee empl){
+        return String.format("id=%d, fullName='%s', salary=%.2f", empl.getId(), empl.getFullName(), empl.getSalary());
+    }
+
+    public static void printAllEmployeesSalaryLessThan(Employee[] arr, double salary){
+        System.out.printf("Сотрудники с зарплатой меньше %.2f:\n", salary);
+        for (final Employee empl : arr){
+            if (empl != null && empl.getSalary() < salary){
+                System.out.println(getEmployeeFormatted(empl));
+            }
+        }
+    }
+
+    public static void printAllEmployeesSalaryGreaterOrEqualThan(Employee[] arr, double salary){
+        System.out.printf("Сотрудники с зарплатой не меньше %.2f:\n", salary);
+        for (final Employee empl : arr){
+            if (empl != null && empl.getSalary() >= salary){
+                System.out.println(getEmployeeFormatted(empl));
+            }
+        }
+    }
 
 }
