@@ -7,9 +7,9 @@ public class Employee {
     final private int id;
     final private String fullName;
     private int department;
-    private float salary;
+    private double salary;
 
-    public Employee(String fullName, int department, float salary) {
+    public Employee(String fullName, int department, double salary) {
         if (fullName == null || fullName.trim().isEmpty()) throw new IllegalArgumentException("Не указаны ФИО");
         this.fullName = fullName.trim();
         this.setDepartment(department);
@@ -44,15 +44,15 @@ public class Employee {
         }
     }
 
-    public float getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(float salary) {
+    public void setSalary(double salary) {
         if (salary < 0) {
             throw new IllegalArgumentException("Значение зарплаты меньше нуля");
         }
-        this.salary = (float) (Math.round(salary * 100) / 100);
+        this.salary = (double) (Math.round(salary * 100) / 100);
     }
 
     @Override

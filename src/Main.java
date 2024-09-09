@@ -12,6 +12,9 @@ public class Main {
         System.out.printf("Сотрудник с максимальной зарплатой: %s\n", getEmployeeMaxSalary(employees));
         System.out.printf("Средняя зарплата: %.2f\n", getAvgSalary(employees));
         printAllEmployeesFIO(employees);
+
+        changeSalaryByPercent(employees, 10.5);
+        printAllEmployees(employees);
     }
 
     public static void printAllEmployees(Employee[] arr) {
@@ -30,8 +33,8 @@ public class Main {
         }
     }
 
-    public static float getAllSalary(Employee[] arr) {
-        float sum = 0f;
+    public static double getAllSalary(Employee[] arr) {
+        double sum = 0;
         for (final Employee empl : arr) {
             if (empl != null) {
                 sum += empl.getSalary();
@@ -41,7 +44,7 @@ public class Main {
     }
 
     public static Employee getEmployeeMinSalary(Employee[] arr) {
-        float minSalary = 2_000_000_000f;
+        double minSalary = 2_000_000_000;
         Employee ret = null;
         for (final Employee empl : arr) {
             if (empl != null && minSalary > empl.getSalary()) {
@@ -53,7 +56,7 @@ public class Main {
     }
 
     public static Employee getEmployeeMaxSalary(Employee[] arr) {
-        float maxSalary = 0f;
+        double maxSalary = 0;
         Employee ret = null;
         for (final Employee empl : arr) {
             if (empl != null && maxSalary < empl.getSalary()) {
@@ -73,9 +76,15 @@ public class Main {
     }
 
 
-    public static float getAvgSalary(Employee[] arr) {
-        float sum = getAllSalary(arr);
+    public static double getAvgSalary(Employee[] arr) {
+        double sum = getAllSalary(arr);
         int len = getEmployeeCount(arr);
-        return (float) (Math.round(sum / len * 100) / 100);
+        return (double) (Math.round(sum / len * 100) / 100);
+    }
+
+    public static void changeSalaryByPercent(Employee[] arr, double changePercent) {
+        for (final Employee empl : arr) {
+            if (empl != null) empl.setSalary(empl.getSalary() * (100 + changePercent) / 100);
+        }
     }
 }
