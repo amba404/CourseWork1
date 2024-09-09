@@ -1,0 +1,167 @@
+public class EmployeeBook {
+    private Employee[] employees = new Employee[10];
+
+
+    private boolean isEmployeeNeed(Employee employee, int department) {
+        return employee != null && (department < 0 || employee.getDepartment() == department);
+    }
+
+    public boolean addEmployee(Employee employee) {
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] == null) {
+                employees[i] = employee;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void delEmployeeById(int id) {
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null && employees[i].getId() == id) employees[i] = null;
+        }
+    }
+
+    public Employee getEmployeeById(int id) {
+        for (Employee employee : employees) {
+            if (employee.getId() == id) return employee;
+        }
+        return null;
+    }
+
+    public void printAllEmployees(int department) {
+        System.out.printf("Список сотрудников отдела %d (всего %d):\n", department, getEmployeeCount(department));
+        for (final Employee empl : employees) {
+            if (isEmployeeNeed(empl, department)) {
+                System.out.println(getEmployeeFormatted(empl));
+            }
+        }
+    }
+
+    public void printAllEmployees() {
+        System.out.printf("Список сотрудников (всего %d):\n", getEmployeeCount());
+        for (final Employee empl : employees) {
+            if (empl != null) {
+                System.out.println(empl);
+            }
+        }
+    }
+
+
+    public void printAllEmployeesFIO(int department) {
+        for (final Employee empl : employees) {
+            if (isEmployeeNeed(empl, department)) {
+                System.out.println(empl.getFullName());
+            }
+        }
+    }
+
+    public void printAllEmployeesFIO() {
+        printAllEmployeesFIO(-1);
+    }
+
+    public double getAllSalary(int department) {
+        double sum = 0;
+        for (final Employee empl : employees) {
+            if (isEmployeeNeed(empl, department)) {
+                sum += empl.getSalary();
+            }
+        }
+        return sum;
+    }
+
+    public double getAllSalary() {
+        return getAllSalary(-1);
+    }
+
+    public Employee getEmployeeMinSalary(int department) {
+        double minSalary = 2_000_000_000;
+        Employee ret = null;
+        for (final Employee empl : employees) {
+            if (isEmployeeNeed(empl, department) && minSalary > empl.getSalary()) {
+                minSalary = empl.getSalary();
+                ret = empl;
+            }
+        }
+        return ret;
+    }
+
+    public Employee getEmployeeMinSalary() {
+        return getEmployeeMinSalary(-1);
+    }
+
+
+    public Employee getEmployeeMaxSalary() {
+        return getEmployeeMaxSalary(-1);
+    }
+
+    public Employee getEmployeeMaxSalary(int department) {
+        double maxSalary = 0;
+        Employee ret = null;
+        for (final Employee empl : employees) {
+            if (isEmployeeNeed(empl, department)
+                    && maxSalary < empl.getSalary()) {
+                maxSalary = empl.getSalary();
+                ret = empl;
+            }
+        }
+        return ret;
+    }
+
+    public int getEmployeeCount(int department) {
+        int cnt = 0;
+        for (final Employee empl : employees) {
+            if (isEmployeeNeed(empl, department)) cnt++;
+        }
+        return cnt;
+    }
+
+    public int getEmployeeCount() {
+        return getEmployeeCount(-1);
+    }
+
+
+    public double getAvgSalary(int department) {
+        double sum = getAllSalary(department);
+        int len = getEmployeeCount(department);
+        return (double) (Math.round(sum / len * 100) / 100);
+    }
+
+    public double getAvgSalary() {
+        return getAvgSalary(-1);
+    }
+
+    public void changeSalaryByPercent(double changePercent, int department) {
+        for (final Employee empl : employees) {
+            if (isEmployeeNeed(empl, department)) empl.setSalary(empl.getSalary() * (100 + changePercent) / 100);
+        }
+    }
+
+    public void changeSalaryByPercent(double changePercent) {
+        changeSalaryByPercent(changePercent, -1);
+    }
+
+    private String getEmployeeFormatted(Employee empl) {
+        return String.format("id=%d, fullName='%s', salary=%.2f", empl.getId(), empl.getFullName(), empl.getSalary());
+    }
+
+    public void printAllEmployeesSalaryLessThan(double salary) {
+        System.out.printf("Сотрудники с зарплатой меньше %.2f:\n", salary);
+        for (final Employee empl : employees) {
+            if (empl != null && empl.getSalary() < salary) {
+                System.out.println(getEmployeeFormatted(empl));
+            }
+        }
+    }
+
+    public void printAllEmployeesSalaryGreaterOrEqualThan(double salary) {
+        System.out.printf("Сотрудники с зарплатой не меньше %.2f:\n", salary);
+        for (final Employee empl : employees) {
+            if (empl != null && empl.getSalary() >= salary) {
+                System.out.println(getEmployeeFormatted(empl));
+            }
+        }
+    }
+
+
+}
