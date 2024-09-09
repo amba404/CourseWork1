@@ -6,7 +6,8 @@ public class Main {
         emploees[2] = new Employee("Сидоров Сидор Сидорович", 1, 17_000f);
 
         printAllEmployees(emploees);
-        System.out.printf("Всего затрат на зарплату: %.2f", getAllSalary(emploees));
+        System.out.printf("Всего затрат на зарплату: %.2f\n", getAllSalary(emploees));
+        System.out.printf("Сотрудник с минимальной зарплатой: %s\n", getEmployeeMinSalary(emploees));
     }
 
     public static void printAllEmployees(Employee[] arr) {
@@ -25,6 +26,18 @@ public class Main {
             }
         }
         return sum;
+    }
+
+    public static Employee getEmployeeMinSalary(Employee[] arr) {
+        float minSalary = 2_000_000_000;
+        Employee ret = null;
+        for (final Employee empl : arr) {
+            if (empl != null && minSalary > empl.getSalary()) {
+                minSalary = empl.getSalary();
+                ret = empl;
+            }
+        }
+        return ret;
     }
 
 }
