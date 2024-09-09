@@ -70,11 +70,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", department=" + department +
-                ", salary=" + salary +
-                '}';
+        return String.format("department=%d, id=%d, fullName='%s', salary=%.2f", department, id, fullName, salary);
     }
 }
