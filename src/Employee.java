@@ -1,13 +1,16 @@
 import java.util.Objects;
 
-import static java.lang.Math.round;
-
 public class Employee {
     private static int nextId = 0;
+
     final private int id;
     final private String fullName;
     private int department;
     private double salary;
+
+    final private int minDepNumber = 1;
+    final private int maxDepNumber = 5;
+
 
     public Employee(String fullName, int department, double salary) {
         if (fullName == null || fullName.trim().isEmpty()) throw new IllegalArgumentException("Не указаны ФИО");
@@ -35,8 +38,6 @@ public class Employee {
     }
 
     public void setDepartment(int department) {
-        int minDepNumber = 1;
-        int maxDepNumber = 5;
         if (department >= minDepNumber && department <= maxDepNumber) {
             this.department = department;
         } else {

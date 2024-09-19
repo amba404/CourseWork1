@@ -3,7 +3,8 @@ import org.w3c.dom.ls.LSOutput;
 public class Main {
     public static void main(String[] args) {
 
-        EmployeeBook employeeBook = new EmployeeBook();
+        int employeesCount = 10;
+        EmployeeBook employeeBook = new EmployeeBook(employeesCount);
 
         employeeBook.addEmployee(new Employee("Иванов Иван Иванович", 1, 15_000));
         employeeBook.addEmployee(new Employee("Петров Петр Петрович", 2, 16_000));
@@ -11,7 +12,7 @@ public class Main {
         employeeBook.addEmployee(new Employee("Горбунков Семен Семенович", 4, 27_000));
 
         for (int i = 0; i < 10; i++) {
-            if (!employeeBook.addEmployee(new Employee("Сотрудник " + i, i % 5 +1, (i+1) * 1_100))) {
+            if (!employeeBook.addEmployee(new Employee("Сотрудник " + i, i % 5 + 1, (i + 1) * 1_100))) {
                 System.out.println("Нет свободных вакансий");
                 break;
             }

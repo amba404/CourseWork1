@@ -1,9 +1,13 @@
 public class EmployeeBook {
-    private Employee[] employees = new Employee[10];
+    private Employee[] employees;
 
 
     private boolean isEmployeeNeed(Employee employee, int department) {
         return employee != null && (department < 0 || employee.getDepartment() == department);
+    }
+
+    public EmployeeBook(int employeesCount) {
+        this.employees = new Employee[employeesCount];
     }
 
     public boolean addEmployee(Employee employee) {
@@ -18,7 +22,10 @@ public class EmployeeBook {
 
     public void delEmployeeById(int id) {
         for (int i = 0; i < employees.length; i++) {
-            if (employees[i] != null && employees[i].getId() == id) employees[i] = null;
+            if (employees[i] != null && employees[i].getId() == id) {
+                employees[i] = null;
+                break;
+            }
         }
     }
 
