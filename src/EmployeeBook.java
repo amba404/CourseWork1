@@ -20,6 +20,11 @@ public class EmployeeBook {
         return false;
     }
 
+    public boolean addEmployee(String fullName, int department, double salary) {
+        Employee employee = new Employee(fullName, department, salary);
+        return addEmployee(employee);
+    }
+
     public void delEmployeeById(int id) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getId() == id) {

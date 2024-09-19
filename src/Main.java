@@ -19,8 +19,9 @@ public class Main {
         }
         System.out.println("employeeBook.getEmployeeCount() = " + employeeBook.getEmployeeCount());
 
-        employeeBook.delEmployeeById(4);
+        employeeBook.delEmployeeById(5);
         System.out.println("employeeBook.getEmployeeCount() = " + employeeBook.getEmployeeCount());
+        employeeBook.addEmployee("Руководитель Отдела 1", 1, 40_000);
 
         System.out.println("employeeBook.getEmployeeById(2) = " + employeeBook.getEmployeeById(2));
 
