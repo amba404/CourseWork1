@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class EmployeeBook {
     private Employee[] employees;
 
@@ -175,5 +177,36 @@ public class EmployeeBook {
         }
     }
 
+    public double getMedianSalary(int department) {
+        double ret = 0;
+
+        int len = getEmployeeCount(department);
+        if (len == 0) return 0;
+
+        double[] salaries = new double[len];
+        int cntr = 0;
+        for (Employee employee : employees) {
+            if (isEmployeeNeed(employee, department)) {
+                salaries[cntr++] = employee.getSalary();
+            }
+        }
+
+        Arrays.sort(salaries);
+
+        switch (len % 2) {
+            case 0:
+                ret = (double) Math.round((salaries[len / 2 - 1] + salaries[len / 2]) / 2 * 100) / 100;
+                break;
+            case 1:
+                ret = salaries[len / 2];
+                break;
+        }
+
+        return ret;
+    }
+
+    public double getMedianSalary() {
+        return getMedianSalary(-1);
+    }
 
 }

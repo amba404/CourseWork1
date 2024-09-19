@@ -81,5 +81,9 @@ public class Main {
         System.out.println("Данные сотрудника с id=2: " + employeeBook.getEmployeeById(2));
         System.out.println();
 
+//        employeeBook.delEmployeeById(6);
+        System.out.println("employeeBook.getAvgSalary() = " + employeeBook.getAvgSalary());
+        System.out.println("employeeBook.getMedianSalary() = " + employeeBook.getMedianSalary());
+
     }
 }
