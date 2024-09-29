@@ -1,6 +1,7 @@
+import java.util.Arrays;
+
 public class EmployeeBook {
     private Employee[] employees;
-
 
     private boolean isEmployeeNeed(Employee employee, int department) {
         return employee != null && (department < 0 || employee.getDepartment() == department);
@@ -41,30 +42,43 @@ public class EmployeeBook {
         return null;
     }
 
-    public void printAllEmployees(int department) {
-        System.out.printf("Список сотрудников отдела %d (всего %d):\n", department, getEmployeeCount(department));
+    public Employee[] getEmployees(int department) {
+        int cntr = getEmployeeCount(department);
+        Employee[] massEmpl = new Employee[cntr];
+        cntr = 0;
         for (final Employee empl : employees) {
             if (isEmployeeNeed(empl, department)) {
-                System.out.println(getEmployeeFormatted(empl));
+                massEmpl[cntr++] = empl;
             }
+        }
+        return massEmpl;
+    }
+
+    public Employee[] getEmployees() {
+        return getEmployees(-1);
+    }
+
+    public void printAllEmployees(int department) {
+        Employee[] massEmpl = getEmployees(department);
+        System.out.printf("Список сотрудников отдела %d (всего %d):\n", department, massEmpl.length);
+        for (final Employee empl : massEmpl) {
+            System.out.println(getEmployeeFormatted(empl));
         }
     }
 
     public void printAllEmployees() {
-        System.out.printf("Список сотрудников (всего %d):\n", getEmployeeCount());
+        Employee[] massEmpl = getEmployees();
+        System.out.printf("Список сотрудников (всего %d):\n", massEmpl.length);
         for (final Employee empl : employees) {
-            if (empl != null) {
-                System.out.println(empl);
-            }
+            System.out.println(empl);
         }
     }
 
 
     public void printAllEmployeesFIO(int department) {
-        for (final Employee empl : employees) {
-            if (isEmployeeNeed(empl, department)) {
-                System.out.println(empl.getFullName());
-            }
+        Employee[] massEmpl = getEmployees(department);
+        for (final Employee empl : massEmpl) {
+            System.out.println(empl.getFullName());
         }
     }
 
@@ -175,5 +189,33 @@ public class EmployeeBook {
         }
     }
 
+    public double getMedianSalary(int department) {
+        double ret = 0;
+
+        int len = getEmployeeCount(department);
+        if (len == 0) return 0;
+
+        double[] salaries = new double[len];
+        int cntr = 0;
+        for (Employee employee : employees) {
+            if (isEmployeeNeed(employee, department)) {
+                salaries[cntr++] = employee.getSalary();
+            }
+        }
+
+        Arrays.sort(salaries);
+
+        ret = switch (len % 2) {
+            case 0 -> (double) Math.round((salaries[len / 2 - 1] + salaries[len / 2]) / 2 * 100) / 100;
+            case 1 -> salaries[len / 2];
+            default -> ret;
+        };
+
+        return ret;
+    }
+
+    public double getMedianSalary() {
+        return getMedianSalary(-1);
+    }
 
 }

@@ -14,7 +14,7 @@ public class Main {
         System.out.println("Добавлено сотрудников (новыми объектами Employee): " + employeeBook.getEmployeeCount());
         System.out.println();
 
-        System.out.print("Проверка на переполнение ваканий...\n...");
+        System.out.print("Проверка на переполнение вакансий...\n...");
         for (int i = 0; i < employeesCount; i++) {
             Employee employee = new Employee("Сотрудник " + i, i % 5 + 1, (i + 1) * 1_100);
             if (employeeBook.addEmployee(employee)) {
@@ -80,6 +80,10 @@ public class Main {
 
         System.out.println("Данные сотрудника с id=2: " + employeeBook.getEmployeeById(2));
         System.out.println();
+
+//        employeeBook.delEmployeeById(6);
+        System.out.println("employeeBook.getAvgSalary() = " + employeeBook.getAvgSalary());
+        System.out.println("employeeBook.getMedianSalary() = " + employeeBook.getMedianSalary());
 
     }
 }
